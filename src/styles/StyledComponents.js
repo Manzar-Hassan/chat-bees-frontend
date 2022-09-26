@@ -7,7 +7,7 @@ export const StyledText = styled(Typography)({
 
 export const StyledBeeImage = styled("img")({
   position: "absolute",
-  top: "5rem",
+  top: "7rem",
   right: 0,
   width: "50%",
 });
@@ -27,7 +27,6 @@ export const StyledGlassContainer = styled("div")({
   border: "1px solid rgba(255, 255, 255, 0.1)",
   borderRadius: "5px",
   padding: "3rem",
-  margin:"0.5rem"
 });
 
 export const DisplayProps = {
@@ -38,7 +37,7 @@ export const DisplayProps = {
 };
 
 export const StyledButton = styled(Button)({
-  maxWidth:"7rem",
+  width:"7rem",
   backgroundColor: "#66a80f",
   marginTop: "1rem",
   "&:hover": {
@@ -47,12 +46,12 @@ export const StyledButton = styled(Button)({
 });
 
 export const StyledTextField = styled("input")(({ theme }) => ({
-  width: "20rem",
+  width:"auto",
   padding: "0.3rem 1rem",
   fontFamily: "'Nunito', sans-serif",
   fontSize: "1rem",
   fontWeight: 600,
-  border: `3px solid #ff4e00`,
+  border: `1px solid #ff4e00`,
   borderRadius: "15px",
   outline: "none",
   backgroundColor: "#ec9f05",
