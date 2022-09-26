@@ -27,6 +27,7 @@ export const StyledGlassContainer = styled("div")({
   border: "1px solid rgba(255, 255, 255, 0.1)",
   borderRadius: "5px",
   padding: "3rem",
+  margin:"0.5rem"
 });
 
 export const DisplayProps = {
@@ -37,7 +38,7 @@ export const DisplayProps = {
 };
 
 export const StyledButton = styled(Button)({
-  width:"7rem",
+  maxWidth:"7rem",
   backgroundColor: "#66a80f",
   marginTop: "1rem",
   "&:hover": {
