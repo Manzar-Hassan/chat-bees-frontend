@@ -37,7 +37,7 @@ export const DisplayProps = {
 };
 
 export const StyledButton = styled(Button)({
-  width:"7rem",
+  width: "7rem",
   backgroundColor: "#66a80f",
   marginTop: "1rem",
   "&:hover": {
@@ -45,8 +45,8 @@ export const StyledButton = styled(Button)({
   },
 });
 
-export const StyledTextField = styled("input")(({ theme }) => ({
-  width:"auto",
+export const StyledTextField = styled("input")({
+  width: "auto",
   padding: "0.3rem 1rem",
   fontFamily: "'Nunito', sans-serif",
   fontSize: "1rem",
@@ -58,4 +58,7 @@ export const StyledTextField = styled("input")(({ theme }) => ({
   "&:focus": {
     backgroundColor: "#ffd43b",
   },
-}));
+  "&:active": {
+    backgroundColor: "#ffd43b",
+  },
+});
