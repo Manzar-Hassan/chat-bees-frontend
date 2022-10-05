@@ -10,7 +10,7 @@ const MsgLoader = () => {
         justifyContent: "center",
       }}
     >
-      <StyledText sx={{ fontSize: "2rem" }}>Please wait...</StyledText>
+      <StyledText sx={{ fontSize: "1.5rem" }}>Please wait...</StyledText>
     </div>
   );
 };

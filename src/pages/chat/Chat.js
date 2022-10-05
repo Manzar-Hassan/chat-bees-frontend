@@ -193,10 +193,19 @@ const Chat = () => {
               <div
                 style={{ display: "flex", gap: "1rem", alignItems: "center" }}
               >
-                <Badge color="success" overlap="circular" variant="dot">
+                <Badge
+                  color="success"
+                  overlap="circular"
+                  variant="dot"
+                  sx={{ display: { xs: "none", md: "block" } }}
+                >
                   <Avatar
                     src="https://i.pravatar.cc/50"
-                    sx={{ height: "2rem", width: "2rem" }}
+                    sx={{
+                      height: "2rem",
+                      width: "2rem",
+                      display: { xs: "none", md: "block" },
+                    }}
                   />
                 </Badge>
                 <StyledText>{loggedInUser}</StyledText>
@@ -255,10 +264,18 @@ const Chat = () => {
                 onClick={() => getChat(user)}
                 key={user._id}
               >
-                <Badge color={badge} overlap="circular" variant="dot">
+                <Badge
+                  color={badge}
+                  overlap="circular"
+                  variant="dot"
+                  sx={{ display: { xs: "none", md: "block" } }}
+                >
                   <Avatar
                     src="https://i.pravatar.cc/50"
-                    sx={{ height: "1.5rem", width: "1.5rem" }}
+                    sx={{
+                      height: "1.5rem",
+                      width: "1.5rem",
+                    }}
                   />
                 </Badge>
                 <StyledText>{user.username}</StyledText>
