@@ -54,11 +54,5 @@ export const StyledTextField = styled("input")({
   border: `1px solid #ff4e00`,
   borderRadius: "15px",
   outline: "none",
-  backgroundColor: "#ec9f05",
-  "&:focus": {
-    backgroundColor: "#ffd43b",
-  },
-  "&:active": {
-    backgroundColor: "#ffd43b",
-  },
+  backgroundColor: "#ffd43b",
 });
