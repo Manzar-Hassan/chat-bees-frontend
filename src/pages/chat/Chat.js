@@ -32,7 +32,7 @@ const socket = socketIo(ENDPOINT);
 const Chat = () => {
   const [sentMsg, setsentMsg] = useState("");
   const [selectedFriend, setSelectedFriend] = useState("");
-  const [badge, setBadge] = useState("error");
+  const [badge, setBadge] = useState({});
   const [typing, setTyping] = useState(false);
   const [typingTimeout, setTypingTimeout] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -125,8 +125,9 @@ const Chat = () => {
   };
 
   useEffect(() => {
-    socket.on("status-online", () => {
-      setBadge("success");
+    socket.on("user-status-online", (onlineUsers) => {
+      console.log(onlineUsers);
+      setBadge(onlineUsers);
     });
 
     socket.on("receivedMessage", (msg) => {
@@ -141,6 +142,12 @@ const Chat = () => {
       setTyping(false);
     });
   });
+
+  useEffect(() => {
+    if (loggedInUser) {
+      socket.emit("user-online", loggedInUser);
+    }
+  }, [loggedInUser]);
 
   return (
     <>
@@ -249,38 +256,44 @@ const Chat = () => {
             </StyledText>
             <Divider />
 
-            {users.map((user) => (
-              <Stack
-                direction="row"
-                alignItems="center"
-                gap={2}
-                sx={{
-                  cursor: "pointer",
-                  padding: "0.5rem",
-                  borderRadius: "16px",
-                  backgroundColor:
-                    selectedFriend === user.username ? "#ffc078" : "",
-                }}
-                onClick={() => getChat(user)}
-                key={user._id}
-              >
-                <Badge
-                  color={badge}
-                  overlap="circular"
-                  variant="dot"
-                  sx={{ display: { xs: "none", md: "block" } }}
+            {users
+              .filter((users) => users.username !== loggedInUser)
+              .map((user) => (
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  gap={2}
+                  sx={{
+                    cursor: "pointer",
+                    padding: "0.5rem",
+                    borderRadius: "16px",
+                    backgroundColor:
+                      selectedFriend === user.username ? "#ffc078" : "",
+                  }}
+                  onClick={() => getChat(user)}
+                  key={user._id}
                 >
-                  <Avatar
-                    src="https://i.pravatar.cc/50"
-                    sx={{
-                      height: "1.5rem",
-                      width: "1.5rem",
-                    }}
-                  />
-                </Badge>
-                <StyledText>{user.username}</StyledText>
-              </Stack>
-            ))}
+                  <Badge
+                    color={
+                      Object.values(badge).includes(user.username)
+                        ? "success"
+                        : "error"
+                    }
+                    overlap="circular"
+                    variant="dot"
+                    sx={{ display: { xs: "none", md: "block" } }}
+                  >
+                    <Avatar
+                      src="https://i.pravatar.cc/50"
+                      sx={{
+                        height: "1.5rem",
+                        width: "1.5rem",
+                      }}
+                    />
+                  </Badge>
+                  <StyledText>{user.username}</StyledText>
+                </Stack>
+              ))}
           </Box>
           <Box
             sx={{
