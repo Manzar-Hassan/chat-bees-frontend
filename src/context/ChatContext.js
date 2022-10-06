@@ -4,12 +4,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ChatContext = createContext();
 
-export const registerUserLink = "https://chat-bees-backend.herokuapp.com//register";
-export const loginUserLink = "https://chat-bees-backend.herokuapp.com//login";
-export const chatLink = "https://chat-bees-backend.herokuapp.com//chat";
-export const roomIdLink = "https://chat-bees-backend.herokuapp.com//chatRoomId";
-export const roomConversationsLink = "https://chat-bees-backend.herokuapp.com//roomConversations";
-export const roomAddMessageLink = "https://chat-bees-backend.herokuapp.com//addMessage";
+export const registerUserLink = "https://chat-bees-backend.herokuapp.com/register";
+export const loginUserLink = "https://chat-bees-backend.herokuapp.com/login";
+export const chatLink = "https://chat-bees-backend.herokuapp.com/chat";
+export const roomIdLink = "https://chat-bees-backend.herokuapp.com/chatRoomId";
+export const roomConversationsLink = "https://chat-bees-backend.herokuapp.com/roomConversations";
+export const roomAddMessageLink = "https://chat-bees-backend.herokuapp.com/addMessage";
 
 export const initialRegisterValues = {
   username: "",

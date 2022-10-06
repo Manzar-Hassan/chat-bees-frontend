@@ -69,8 +69,6 @@ const Login = () => {
           <div>
             <StyledText>username</StyledText>
             <StyledTextField
-              size="small"
-              label="username"
               type="text"
               name="username"
               value={loginDetails.username}
@@ -80,8 +78,6 @@ const Login = () => {
           <div>
             <StyledText>password</StyledText>
             <StyledTextField
-              size="small"
-              label="password"
               type="password"
               name="password"
               value={loginDetails.password}
