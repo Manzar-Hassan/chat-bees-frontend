@@ -49,20 +49,25 @@ const Chat = () => {
     setLoading,
   } = useContext(ChatContext);
 
+  //setting material ui anchor for logout button
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
+  //getting the private chats of specific friend that the logged in user chooses
   const getChat = async (friend) => {
+    //defining array of users for private chat
     const currentConversationUsers = [loggedInUser, friend.username];
     setSelectedFriend(friend.username);
 
+    //fetching roomId
     try {
       setLoading(true);
       const currentRoomId = await axios.post(roomIdLink, {
         users: currentConversationUsers,
       });
 
+      //setting roomId after fetching it from api
       setRoomId(currentRoomId.data);
 
       //joining the new room
@@ -85,6 +90,7 @@ const Chat = () => {
   };
 
   const sendMsg = async () => {
+    //defining message to be sent to user on the other end
     const singleMessage = {
       roomId: roomId,
       sender: loggedInUser,
@@ -93,15 +99,19 @@ const Chat = () => {
       time: new Date(),
     };
 
+    //checking if the friend user want to send the message to is selected or not
     if (singleMessage.receiver) {
       socket.emit("sentMessage", singleMessage);
       setConversations([...conversations, singleMessage]);
       setsentMsg("");
+
+      //if the recipiant friend is not selected
     } else {
       alert("please select the friend you want to deliver this message!!");
       return;
     }
 
+    //fetching the conversation between friends sorted by time
     try {
       await axios.post(roomAddMessageLink, singleMessage);
     } catch (error) {
@@ -109,14 +119,18 @@ const Chat = () => {
     }
   };
 
+  //defining function for typing functionality
   const handleInput = (e) => {
+    //getting input from textfield
     setsentMsg(e.target.value);
+    //emitting to backend that connected user has started typing
     socket.emit("typing-started", roomId);
 
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
 
+    //emitting to backend that connected user has stopped typing
     setTypingTimeout(
       setTimeout(() => {
         socket.emit("typing-stopped", roomId);
@@ -125,24 +139,29 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    //socket event when user is online
     socket.on("user-status-online", (onlineUsers) => {
       console.log(onlineUsers);
       setBadge(onlineUsers);
     });
 
+    //socket event when user receives a message
     socket.on("receivedMessage", (msg) => {
       setConversations([...conversations, msg]);
     });
 
+    //socket event when user started typing
     socket.on("typing-status-started", () => {
       setTyping(true);
     });
 
+    //socket event when user stopped typing
     socket.on("typing-status-stopped", () => {
       setTyping(false);
     });
   });
 
+  //socket event when user comes online
   useEffect(() => {
     if (loggedInUser) {
       socket.emit("user-online", loggedInUser);
